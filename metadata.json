@@ -1,0 +1,7 @@
+{
+  "name": "استوديو الميديا أوفلاين | Offline Media Studio",
+  "description": "تطبيق متكامل لتعديل وتصميم الصور والفيديوهات يعمل بدون إنترنت بالكامل مع دعم متعدد اللغات وأدوات احترافية.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

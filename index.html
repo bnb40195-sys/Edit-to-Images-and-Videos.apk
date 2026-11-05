@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>استوديو الميديا أوفلاين | Offline Media Studio</title>
+    <meta name="description" content="تطبيق متكامل لتعديل وتصميم الصور والفيديوهات يعمل بدون إنترنت بالكامل مع دعم متعدد اللغات وأدوات احترافية." />
+    <meta property="og:title" content="استوديو الميديا أوفلاين | Offline Media Studio" />
+    <meta property="og:description" content="تطبيق متكامل لتعديل وتصميم الصور والفيديوهات يعمل بدون إنترنت بالكامل مع دعم متعدد اللغات وأدوات احترافية." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+      (function() {
+        var NativeWebSocket = window.WebSocket;
+        if (NativeWebSocket) {
+          function isViteHmr(url, protocols) {
+            if (protocols === 'vite-hmr') return true;
+            if (Array.isArray(protocols) && protocols.indexOf('vite-hmr') !== -1) return true;
+            if (typeof url === 'string' && (url.indexOf('vite-hmr') !== -1 || url.indexOf('/@vite') !== -1)) return true;
+            return false;
+          }
+
+          class FakeHmrSocket extends EventTarget {
+            constructor(url, protocols) {
+              super();
+              this.url = String(url || '');
+              this.protocol = 'vite-hmr';
+              this.readyState = 1; // OPEN: prevents 'closed without opened' rejection
+              this.bufferedAmount = 0;
+              this.extensions = '';
+              this.binaryType = 'blob';
+              this.onopen = null;
+              this.onmessage = null;
+              this.onerror = null;
+              this.onclose = null;
+            }
+            send() {}
+            close() {
+              this.readyState = 3;
+            }
+          }
+
+          FakeHmrSocket.CONNECTING = 0;
+          FakeHmrSocket.OPEN = 1;
+          FakeHmrSocket.CLOSING = 2;
+          FakeHmrSocket.CLOSED = 3;
+
+          var WebSocketProxy = new Proxy(NativeWebSocket, {
+            construct(target, args) {
+              var url = args[0];
+              var protocols = args[1];
+              if (isViteHmr(url, protocols)) {
+                return new FakeHmrSocket(url, protocols);
+              }
+              return Reflect.construct(target, args);
+            }
+          });
+
+          WebSocketProxy.CONNECTING = 0;
+          WebSocketProxy.OPEN = 1;
+          WebSocketProxy.CLOSING = 2;
+          WebSocketProxy.CLOSED = 3;
+
+          window.WebSocket = WebSocketProxy;
+        }
+
+        // Suppress benign Vite HMR WebSocket disconnect noise in sandboxed preview iframe
+        var origConsoleError = console.error;
+        console.error = function() {
+          for (var i = 0; i < arguments.length; i++) {
+            var item = arguments[i];
+            var text = item instanceof Error ? (item.message + ' ' + (item.stack || '')) : String(item || '');
+            if (text.includes('WebSocket') || text.includes('closed without opened') || text.includes('@vite/client')) {
+              return;
+            }
+          }
+          return origConsoleError.apply(console, arguments);
+        };
+
+        window.addEventListener('error', function(e) {
+          var msg = e && (e.message || (e.error && e.error.message)) || '';
+          if (msg.includes('WebSocket') || msg.includes('closed without opened') || msg.includes('@vite/client')) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            return true;
+          }
+        }, true);
+
+        window.addEventListener('unhandledrejection', function(e) {
+          var reason = e.reason ? String(e.reason.message || e.reason.stack || e.reason) : '';
+          if (reason.includes('WebSocket') || reason.includes('closed without opened') || reason.includes('@vite/client')) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+          }
+        }, true);
+      })();
+    </script>
+  </head>
+  <body class="bg-slate-950 text-slate-100 antialiased selection:bg-blue-600 selection:text-white min-h-screen overflow-x-hidden">
+    <div id="root">
+      <div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #0b1120; color: #ffffff; font-family: 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; text-align: center; padding: 20px;">
+        <div style="width: 88px; height: 88px; margin-bottom: 20px; border-radius: 26px; background: linear-gradient(135deg, #0284c7, #2563eb, #7c3aed); padding: 3px; box-shadow: 0 12px 30px rgba(37, 99, 235, 0.45);">
+          <img src="./app-icon.png" alt="App Icon" style="width: 100%; height: 100%; border-radius: 23px; object-fit: cover;" onerror="this.style.display='none'" />
+        </div>
+        <h2 style="font-size: 22px; font-weight: 700; margin: 0 0 8px 0;">استوديو الميديا أوفلاين</h2>
+        <p style="font-size: 14px; color: #94a3b8; margin: 0 0 20px 0;">Offline Media Studio & Photo Editor</p>
+        <div style="display: flex; align-items: center; gap: 10px; background: rgba(30, 41, 59, 0.85); border: 1px solid rgba(51, 65, 85, 0.7); padding: 10px 18px; border-radius: 14px; font-size: 13px; color: #38bdf8;">
+          <div style="width: 8px; height: 8px; border-radius: 50%; background: #38bdf8; box-shadow: 0 0 10px #38bdf8;"></div>
+          <span>جاري تشغيل محرر الصور والمؤثرات...</span>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
+
